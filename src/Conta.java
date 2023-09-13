@@ -3,6 +3,7 @@ public abstract class Conta {
     private int agencia;
     private int numero;
     private double saldo;
+    private boolean premium;
 
     public Pessoa getTitular() {
         return titular;
@@ -17,11 +18,13 @@ public abstract class Conta {
         return saldo;
     }
 
-    public Conta(Pessoa titular, int agencia, int numero, double saldo) {
+    public Conta(Pessoa titular, int agencia, int numero, double saldo, boolean premium) {
         this.titular = titular;
         this.agencia = agencia;
         this.numero = numero;
         this.saldo = saldo;
+        this.premium = premium;
+
     }
 
     void depositar(double valor) {
@@ -34,15 +37,15 @@ public abstract class Conta {
         System.out.println("-------------------------------");
     }
 
-    void sacar(double valor) {
-        if(saldo - valor < 0) {
+    public void sacar(double valor) {
+        if (saldo >= valor) {
+            saldo -= valor;
+            System.out.println("Saque de " + valor + " realizado com sucesso.");
+            System.out.println("Saldo atual: " + saldo);
+            System.out.println("-------------------------------");
+        } else {
             throw new IllegalStateException("Saldo Insuficiente");
         }
-        saldo -= valor;
-        System.out.println("Saque no valor de R$ " + valor + " foi realizado com sucesso");
-        System.out.println("Saldo atual: R$ " + saldo);
-        System.out.println("-------------------------------");
-
     }
 
 
@@ -52,6 +55,8 @@ public abstract class Conta {
         System.out.println("Agencia: " + this.agencia);
         System.out.println("Conta: " + this.numero);
         System.out.println("Saldo: " + this.saldo);
+        String typeAcount = premium ? "Premium" : "Standard";
+        System.out.println("Cliente " + typeAcount);
         System.out.println("-------------------------------");
     }
 }

@@ -4,13 +4,16 @@ public class Main {
         Pessoa titular2 = new Pessoa("Mario Claudia", "412.254.461-61");
 
 
-        ContaComum minhaConta = new ContaComum(titular1,1234, 222, 5932);
+        ContaComum minhaConta = new ContaComum(titular1,1234, 222, 5932, false);
         minhaConta.depositar(20000);
-        ContaPremium suaConta = new ContaPremium(titular2, 1234, 111, 24424);
-        minhaConta.sacar(20000, ContaComum.taxa);
+        minhaConta.sacar(20000);
         minhaConta.mostrarDetalhes();
 
-        suaConta.sacar(20000, ContaPremium.taxa);
+        ContaPremium suaConta = new ContaPremium(titular2, 1234, 111, 24424, true);
+        suaConta.sacar(20000);
+        suaConta.depositar(525);
+        suaConta.mostrarDetalhes();
+        suaConta.sacar(1070);
         suaConta.mostrarDetalhes();
     }
 }
