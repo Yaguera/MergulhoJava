@@ -1,3 +1,7 @@
+package com.algaworks.banco.app;
+
+import java.util.Objects;
+
 public abstract class Conta {
     private Pessoa titular;
     private int agencia;
@@ -19,12 +23,13 @@ public abstract class Conta {
     }
 
     public Conta(Pessoa titular, int agencia, int numero, double saldo, boolean premium) {
+        Objects.requireNonNull(titular);
+
         this.titular = titular;
         this.agencia = agencia;
         this.numero = numero;
         this.saldo = saldo;
         this.premium = premium;
-
     }
 
     void depositar(double valor) {
@@ -53,7 +58,7 @@ public abstract class Conta {
         System.out.println("Nome: " + titular.getNome());
         System.out.println("CPF: " + titular.getCpf());
         System.out.println("Agencia: " + this.agencia);
-        System.out.println("Conta: " + this.numero);
+        System.out.println("com.algaworks.banco.app.Conta: " + this.numero);
         System.out.println("Saldo: " + this.saldo);
         String typeAcount = premium ? "Premium" : "Standard";
         System.out.println("Cliente " + typeAcount);

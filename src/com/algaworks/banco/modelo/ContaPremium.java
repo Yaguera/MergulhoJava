@@ -1,3 +1,5 @@
+package com.algaworks.banco.app;
+
 public class ContaPremium extends Conta{
     static double taxa = 0.01;
 

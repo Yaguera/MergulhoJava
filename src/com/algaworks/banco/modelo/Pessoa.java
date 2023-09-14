@@ -1,3 +1,5 @@
+package com.algaworks.banco.app;
+
 public class Pessoa {
     private String nome;
     private String cpf;
