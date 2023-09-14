@@ -1,13 +1,28 @@
-package com.algaworks.banco.app;
+package com.algaworks.banco.modelo;
 
-public class ContaPremium extends Conta{
-    static double taxa = 0.01;
+public class ContaPremium extends ContaInvestimento{
+    static double taxa = 0.1;
+    private double valorLimite;
 
-    public ContaPremium(Pessoa titular, int agencia, int numero, double saldo, boolean premium) {
-        super(titular, agencia, numero, saldo, premium);
+    public double getValorLimite() {
+        return valorLimite;
+    }
+
+    @Override
+    public double getSaldoDisponivel() {
+        return getSaldo() + getValorLimite();
+    }
+
+    public void setValorLimite(double valorLimite) {
+        this.valorLimite = valorLimite;
+    }
+
+    public ContaPremium(Pessoa titular, int agencia, int numero, boolean premium, double valorLimite) {
+        super(titular, agencia, numero, premium);
+        this.valorLimite = valorLimite;
     }
     public void sacar(double valor) {
-        double valorComTaxa = valor - (valor * taxa);
+        double valorComTaxa = valor - (valor * taxa)/100;
         super.sacar(valorComTaxa);
     }
 }

@@ -1,8 +1,8 @@
-package com.algaworks.banco.app;
+package com.algaworks.banco.modelo;
 
 public class Pessoa {
-    private String nome;
-    private String cpf;
+    private final String nome;
+    private final String cpf;
 
     public Pessoa(String nome, String cpf) {
         this.nome = nome;
@@ -12,11 +12,6 @@ public class Pessoa {
     public String getNome() {
         return nome;
     }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public String getCpf() {
         return cpf;
     }

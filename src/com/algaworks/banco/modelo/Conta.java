@@ -1,11 +1,11 @@
-package com.algaworks.banco.app;
+package com.algaworks.banco.modelo;
 
 import java.util.Objects;
 
 public abstract class Conta {
-    private Pessoa titular;
-    private int agencia;
-    private int numero;
+    private final Pessoa titular;
+    private final int agencia;
+    private final int numero;
     private double saldo;
     private boolean premium;
 
@@ -21,18 +21,20 @@ public abstract class Conta {
     public double getSaldo() {
         return saldo;
     }
+    public double getSaldoDisponivel() {
+        return getSaldo();
+    }
 
-    public Conta(Pessoa titular, int agencia, int numero, double saldo, boolean premium) {
+    public Conta(Pessoa titular, int agencia, int numero, boolean premium) {
         Objects.requireNonNull(titular);
 
         this.titular = titular;
         this.agencia = agencia;
         this.numero = numero;
-        this.saldo = saldo;
         this.premium = premium;
     }
 
-    void depositar(double valor) {
+    public void depositar(double valor) {
         if (valor <= 0) {
             throw new IllegalArgumentException("Insira um valor válido.");
         }
@@ -43,7 +45,7 @@ public abstract class Conta {
     }
 
     public void sacar(double valor) {
-        if (saldo >= valor) {
+        if (getSaldoDisponivel() >= valor) {
             saldo -= valor;
             System.out.println("Saque de " + valor + " realizado com sucesso.");
             System.out.println("Saldo atual: " + saldo);
@@ -54,7 +56,8 @@ public abstract class Conta {
     }
 
 
-    void mostrarDetalhes() {
+
+    public void mostrarDetalhes() {
         System.out.println("Nome: " + titular.getNome());
         System.out.println("CPF: " + titular.getCpf());
         System.out.println("Agencia: " + this.agencia);
