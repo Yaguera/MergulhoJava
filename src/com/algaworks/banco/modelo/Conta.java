@@ -9,6 +9,14 @@ public abstract class Conta {
     private double saldo;
     private boolean premium;
 
+    public boolean isPremium() {
+        return premium;
+    }
+
+    public void setPremium(boolean premium) {
+        this.premium = premium;
+    }
+
     public Pessoa getTitular() {
         return titular;
     }
@@ -39,8 +47,8 @@ public abstract class Conta {
             throw new IllegalArgumentException("Insira um valor válido.");
         }
         saldo += valor;
-        System.out.println("Deposito de R$ " + valor + " foi realizado com sucesso.");
-        System.out.println("Saldo atual: R$ " + saldo);
+        System.out.printf("Foi debitado um valor de %s na conta %d / %d%n", valor, getAgencia(), getNumero());
+        System.out.println(getTitular().getNome() + ", seu saldo atual é de R$ " + saldo);
         System.out.println("-------------------------------");
     }
 
@@ -53,18 +61,5 @@ public abstract class Conta {
         } else {
             throw new IllegalStateException("Saldo Insuficiente");
         }
-    }
-
-
-
-    public void mostrarDetalhes() {
-        System.out.println("Nome: " + titular.getNome());
-        System.out.println("CPF: " + titular.getCpf());
-        System.out.println("Agencia: " + this.agencia);
-        System.out.println("com.algaworks.banco.app.Conta: " + this.numero);
-        System.out.println("Saldo: " + this.saldo);
-        String typeAcount = premium ? "Premium" : "Standard";
-        System.out.println("Cliente " + typeAcount);
-        System.out.println("-------------------------------");
     }
 }
